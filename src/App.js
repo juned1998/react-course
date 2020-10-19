@@ -16,12 +16,12 @@ const App = props => {
   console.log(otherValue);
 
 
-  const switchNameHandler = () => {
+  const switchNameHandler = (newName) => {
     // alert("hello");
     // DON'T DO THIS  this.state.persons[0].name = "Rock";
     setPersonState({
       persons: [
-        { name : "Jerry", age: 21 },
+        { name : newName, age: 21 },
         { name : "Tom", age: 22 },
         { name : "Chandler", age: 25 },
       ],
@@ -29,20 +29,31 @@ const App = props => {
 
     changeOtherValue("NEw Other Value");
   }
+
+  const nameChangeHandler = (event) => {
+    
+    setPersonState({
+      persons: [
+        { name : event.target.value, age: 21 },
+        { name : "Tom", age: 22 },
+        { name : "Chandler", age: 25 },
+      ],
+    });
+  }
   
   return (
     
     <div className="App">
       <h1>Hello</h1>
-      <button onClick={switchNameHandler}>Switch Name</button>
-      <Person name={personsState.persons[0].name} age={personsState.persons[0].age} />
+      <button onClick={() => switchNameHandler("New Name")}>Switch Name</button>
+      <Person nameChange = {nameChangeHandler} name={personsState.persons[0].name} age={personsState.persons[0].age} />
       <Person name={personsState.persons[1].name} age={personsState.persons[1].age}>My hobby is reading books.</Person>
-      <Person name={personsState.persons[2].name} age={personsState.persons[2].age}/>
+      <Person click={switchNameHandler.bind(this, "Bind NAme")} name={personsState.persons[2].name} age={personsState.persons[2].age}/>
     </div>
     //React.createElement('div', {className:"App"}, React.createElement('h1',null, 'he12llo'))
   );
   
-}
+}  
 
 export default App;
 
