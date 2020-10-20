@@ -12,6 +12,7 @@ const App = props => {
   });
 
   const [otherValue, changeOtherValue] = useState("Some Value");
+  const [showPersonsState, togglePersonState] = useState(false);
 
   console.log(otherValue);
 
@@ -40,15 +41,37 @@ const App = props => {
       ],
     });
   }
+
+  const togglePersonDiv = () => { 
+    togglePersonState(!showPersonsState);
+    console.log(showPersonsState);
+  }
+
+  const style = {
+    border: '1px solid blue',
+    backgroundColor: 'white',
+    font: 'inherit',
+    padding: '8px',
+    cursor: 'pointer',
+  }
+
+  let persons = null;
+  if(showPersonsState){
+    persons = (
+      <div>
+        {personsState.persons.map( person => {
+          return <Person name = {person.name} age={person.age}></Person>
+        })}
+      </div>
+    ) 
+  }
   
-  return (
-    
+  return (    
     <div className="App">
       <h1>Hello</h1>
-      <button onClick={() => switchNameHandler("New Name")}>Switch Name</button>
-      <Person nameChange = {nameChangeHandler} name={personsState.persons[0].name} age={personsState.persons[0].age} />
-      <Person name={personsState.persons[1].name} age={personsState.persons[1].age}>My hobby is reading books.</Person>
-      <Person click={switchNameHandler.bind(this, "Bind NAme")} name={personsState.persons[2].name} age={personsState.persons[2].age}/>
+      <button style={style} onClick={() => switchNameHandler("New Name")}>Switch Name</button>
+      <button style={style} onClick={togglePersonDiv}>Toggle Persons Div</button>
+      {persons}
     </div>
     //React.createElement('div', {className:"App"}, React.createElement('h1',null, 'he12llo'))
   );
