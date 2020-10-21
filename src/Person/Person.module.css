@@ -1,6 +1,12 @@
 .Person {
-  width: 16%;
+  width: 30%;
   padding: 16px 6px;
   border: solid 1px #000;
   margin: 16px auto;
+}
+
+@media (max-width: 500px) {
+  .Person {
+    width: 450px;
+  }
 }
